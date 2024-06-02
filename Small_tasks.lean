@@ -35,7 +35,7 @@ inductive full_binary_tree_with_nodes : ℕ → Type
 
 -- 4.) Construct a bijection list plane_tree ≃ plane_tree.
 
-def bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
+theorem bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
   toFun := plane_tree.parent_of
   invFun := fun
     | .parent_of children => children
@@ -46,3 +46,8 @@ def bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
     | .parent_of _ => rfl
 
 -- 5.) Construct the rotating isomorphism, which is the isomorphism between plane trees and full binary trees.
+
+/-- Function from full binary trees (FBT) to plane trees (PT). -/
+def FBT_to_PT : full_binary_tree → plane_tree := fun
+  | .leaf => .parent_of []
+  | .node T1 T2 => plane_tree.parent_of (List.cons (FBT_to_PT T1) (List.cons (FBT_to_PT T2) []))
