@@ -29,3 +29,8 @@ inductive full_binary_tree_with_nodes : ℕ → Type
           full_binary_tree_with_nodes (n + m + 1)
 
 -- 5.) Define the type of ballot sequences of length n.
+
+inductive BallotSeq : ℕ → ℕ → Type
+  | nil : BallotSeq 0 0
+  | cons_A {a b : ℕ} (s : BallotSeq a b) : BallotSeq (a + 1) b
+  | cons_B {a b : ℕ} (s : BallotSeq a b) (h : a > b) : BallotSeq a (b + 1)
