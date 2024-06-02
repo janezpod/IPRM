@@ -50,4 +50,9 @@ theorem bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
 /-- Function from full binary trees (FBT) to plane trees (PT). -/
 def FBT_to_PT : full_binary_tree → plane_tree := fun
   | .leaf => .parent_of []
-  | .node T1 T2 => plane_tree.parent_of (List.cons (FBT_to_PT T1) (List.cons (FBT_to_PT T2) []))
+  | .node T1 T2 => .parent_of (List.cons (FBT_to_PT T1) (List.cons (FBT_to_PT T2) []))
+
+/-- Function from plane trees (PT) to full binary trees (FBT). -/
+def PT_to_FBT : plane_tree → full_binary_tree := fun
+  | .parent_of [] => .leaf
+  | .parent_of (hd :: tl) => .node (PT_to_FBT hd) (PT_to_FBT (.parent_of tl))
