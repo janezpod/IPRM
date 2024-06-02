@@ -34,7 +34,7 @@ inductive full_binary_tree: Type
 
 -- 4.) Construct the type of full binary trees with n nodes, not counting the leaves.
 
-/--A full binary tree wiyh 0 nodes is a leaf. If it has more nodes then it is must
+/--A full binary tree with 0 nodes is a leaf. If it has more nodes then it is must
 be constructed from two full binary trees.-/
 inductive full_binary_tree_with_nodes : ℕ → Type
 | leaf : full_binary_tree_with_nodes 0
@@ -77,3 +77,12 @@ def FBT_to_PT : full_binary_tree → plane_tree := fun
 def PT_to_FBT : plane_tree → full_binary_tree := fun
   | .parent_of [] => .leaf
   | .parent_of (hd :: tl) => .node (PT_to_FBT hd) (PT_to_FBT (.parent_of tl))
+
+theorem bijection_FBT_and_PT : full_binary_tree ≃ plane_tree where
+  toFun := FBT_to_PT
+  invFun := PT_to_FBT
+  left_inv := fun
+    | .leaf => _
+    | .node T1 T2 => _
+  right_inv := fun
+    | .parent_of _ => _
