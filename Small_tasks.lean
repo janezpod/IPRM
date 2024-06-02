@@ -10,7 +10,7 @@ open Finset
 Cₙ₊₁ = ∑ₖ₌₀,₁,.,ₙ CₖCₙ₋₁  and C₀ = 0.-/
 def catalan_number : (n : ℕ) → ℕ
 | 0 => 1
-| n + 1 => ∑ i in range (n + 1), catalan i * catalan (n - i)
+| n + 1 => ∑ i : Fin (n + 1), catalan_number i * catalan_number (n - i)
 
 -- 2.) Formalize the concept of plane trees.
 
@@ -19,6 +19,7 @@ designated vertex v is called the root of P. Then either P consists of the singl
 or else it has a sequence (P_1, . . . ,P_m) of subtrees P_i, 1 ≤ i ≤ m,
 each of which is a plane tree. We define plane trees recursively from bottom-up.-/
 inductive plane_tree : Type
+
 | parent_of : List (plane_tree) → plane_tree
 
 -- 3.) Formalize the concept of full binary trees.
@@ -50,3 +51,24 @@ inductive BallotSeq : ℕ → ℕ → Type
 | nil : BallotSeq 0 0
 | cons_A {a b : ℕ} (s : BallotSeq a b) : BallotSeq (a + 1) b
 | cons_B {a b : ℕ} (s : BallotSeq a b) (h : a > b) : BallotSeq a (b + 1)
+
+-- BIG TASKS
+
+-- 4.) Construct a bijection list plane_tree ≃ plane_tree.
+
+theorem bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
+  toFun := plane_tree.parent_of
+  invFun := fun
+    | .parent_of children => children
+  left_inv := fun
+    | .nil => rfl
+    | .cons _ _ => rfl
+  right_inv := fun
+    | .parent_of _ => rfl
+
+-- 5.) Construct the rotating isomorphism, which is the isomorphism between plane trees and full binary trees.
+
+/-- Function from full binary trees (FBT) to plane trees (PT). -/
+def FBT_to_PT : full_binary_tree → plane_tree := fun
+  | .leaf => .parent_of []
+  | .node T1 T2 => plane_tree.parent_of (List.cons (FBT_to_PT T1) (List.cons (FBT_to_PT T2) []))
