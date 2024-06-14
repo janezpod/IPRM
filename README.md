@@ -1,8 +1,8 @@
-# Catalan numbers formalization project for Logika v računalništvu (2023/2024)
+### Catalan numbers formalization project for Logika v računalništvu (2023/2024)
 
-Formalized tasks: 
-- all small tasks
-- fourth big task 
-- fifth big task (attempt)
+The following tasks were formalized:
+- all of the small tasks
+- the fourth big task: Construct a bijection list PlaneTree ∼= PlaneTree
+- the fifth big task: Construct the *rotating isomorphism*, which is the isomorphism between plane trees and full binary trees.
 
-All tasks are ?? in *tasks.lean* file.
+All of the tasks are located in the *tasks.lean* file.
