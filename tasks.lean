@@ -59,7 +59,7 @@ inductive BallotSeq : ℕ → ℕ → Type
 
 -- 4.) Construct a bijection list plane_tree ≃ plane_tree.
 
-theorem bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
+def bijection_listPT_and_PT : List plane_tree ≃ plane_tree where
   toFun := plane_tree.parent_of
   invFun := fun
     | .parent_of children => children
@@ -83,7 +83,7 @@ def PT_to_FBT : plane_tree → full_binary_tree := fun
   | .parent_of [] => .leaf
   | .parent_of (hd :: tl) => .node (PT_to_FBT hd) (PT_to_FBT (.parent_of tl))
 
-theorem bijection_FBT_and_PT : full_binary_tree ≃ plane_tree where
+def bijection_FBT_and_PT : full_binary_tree ≃ plane_tree where
   toFun := FBT_to_PT
   invFun := PT_to_FBT
   left_inv := by
