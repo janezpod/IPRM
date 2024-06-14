@@ -1,4 +1,4 @@
-#Catalan numbers formalization project for Logika v računalništvu (2023/2024)
+# Catalan numbers formalization project for Logika v računalništvu (2023/2024)
 
 Formalized tasks: 
 - all small tasks
