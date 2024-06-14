@@ -107,8 +107,11 @@ theorem bijection_FBT_and_PT : full_binary_tree ≃ plane_tree where
             rw [PT_to_FBT]
             rw [FBT_to_PT]
          |cons hd tl ih1 => sorry
+            -- ATTEMPT:
             -- rw [PT_to_FBT]
             -- rw [FBT_to_PT]
             -- rw [ih1]
             -- dsimp [plane_tree.node]
-            -- use induction hypothesis for HD
+            -- GOAL: plane_tree.parent_of (FBT_to_PT (PT_to_FBT hd) :: tl) = plane_tree.parent_of (hd :: tl)
+            -- use induction hypothesis for hd, that is (FBT_to_PT (PT_to_FBT hd) = hd, to get plane_tree.parent_of (hd :: tl) = plane_tree.parent_of (hd :: tl)
+            -- rw [rfl]
